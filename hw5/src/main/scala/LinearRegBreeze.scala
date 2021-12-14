@@ -56,9 +56,11 @@ object LinearRegBreeze {
     val true_weights = DenseVector[Double](values = 1.5, 0.3, -0.7)
     val (x, y) = generate_data(weight = true_weights)
     val model = new LinearRegression()
-    model.fit(x, y, 0.1, 1000, debug = false)
-    val y_pred = model.predict(x)
-    val mse = model.mse_loss(y, y_pred)
+    model.fit(x, y, 0.01, 1000, debug = false)
+
+    val (x_val, y_val) = generate_data(weight = true_weights)
+    val y_pred = model.predict(x_val)
+    val mse = model.mse_loss(y_val, y_pred)
 
     println(s"MSE: $mse")
     println(s"true_weights: $true_weights")
